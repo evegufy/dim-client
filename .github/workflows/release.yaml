@@ -107,6 +107,8 @@ jobs:
         with:
            images: |
               ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_SERVICE }}
+              ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
+              ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_WORKER }}
            # Automatically prepare image tags; See action docs for more examples. 
            # semver patter will generate tags like these for example :1 :1.2 :1.2.3
            tags: |
