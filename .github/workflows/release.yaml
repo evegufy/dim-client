@@ -137,3 +137,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
         if: steps.version-check.outputs.exists == 'false'
+
+      - name: Create and push git tag
+        run: |
+          git tag v${{ steps.chart-version.outputs.current }}
+          git push origin v${{ steps.chart-version.outputs.current }}
+        if: steps.version-check.outputs.exists == 'false'
