@@ -47,7 +47,7 @@ jobs:
           - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_SERVICE }}
             dockerfile: docker/Dockerfile-dim-service
           - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
-            dockerfile: ydocker/Dockerfile-dim-migrations
+            dockerfile: docker/Dockerfile-dim-migrations
           - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
             dockerfile: docker/Dockerfile-dim-processes-worker
     steps:
@@ -114,8 +114,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5.5.1
         with:
-          images: |
-            ${{ matrix.image }}
+          images: ${{ matrix.image }}
            # Automatically prepare image tags; See action docs for more examples. 
            # semver patter will generate tags like these for example :1 :1.2 :1.2.3
            tags: |
