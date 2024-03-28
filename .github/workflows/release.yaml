@@ -44,11 +44,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - image: test1
+          - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_SERVICE }}
             dockerfile: docker/Dockerfile-dim-service
-          - image: test2
+          - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
             dockerfile: docker/Dockerfile-dim-migrations
-          - image: test3
+          - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
             dockerfile: docker/Dockerfile-dim-processes-worker
     steps:
       - name: Checkout
@@ -117,13 +117,13 @@ jobs:
           images: ${{ matrix.image }}
            # Automatically prepare image tags; See action docs for more examples. 
            # semver patter will generate tags like these for example :1 :1.2 :1.2.3
-           tags: |
-              type=ref,event=branch
-              type=ref,event=pr
-              type=raw,value=latest
-              type=semver,pattern={{version}},value=${{ steps.chart-version.outputs.current }}
-              type=semver,pattern={{major}},value=${{ steps.chart-version.outputs.current }}
-              type=semver,pattern={{major}}.{{minor}},value=${{ steps.chart-version.outputs.current }}
+          tags: |
+             type=ref,event=branch
+             type=ref,event=pr
+             type=raw,value=latest
+             type=semver,pattern={{version}},value=${{ steps.chart-version.outputs.current }}
+             type=semver,pattern={{major}},value=${{ steps.chart-version.outputs.current }}
+             type=semver,pattern={{major}}.{{minor}},value=${{ steps.chart-version.outputs.current }}
         if: steps.version-check.outputs.exists == 'false'
 
       - name: Build and push Docker images
