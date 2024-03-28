@@ -43,13 +43,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-      include:
-        - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_SERVICE }}
-          dockerfile: docker/Dockerfile-dim-service
-        - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
-          dockerfile: ydocker/Dockerfile-dim-migrations
-        - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
-          dockerfile: docker/Dockerfile-dim-processes-worker
+        include:
+          - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_SERVICE }}
+            dockerfile: docker/Dockerfile-dim-service
+          - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
+            dockerfile: ydocker/Dockerfile-dim-migrations
+          - image: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME_MIGRATIONS }}
+            dockerfile: docker/Dockerfile-dim-processes-worker
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
